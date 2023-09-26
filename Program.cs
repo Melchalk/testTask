@@ -1,13 +1,13 @@
-﻿bool successParse = false; 
+﻿bool successParse = false; //Отметка корректного ввода 
 
-const string mistake = "\nНекоректный ввод\nПовторите попытку\n";
-const int poundsToShilling = 20, shillingsToPennies = 12;
+const string mistake = "\nНекорректный ввод\nПовторите попытку\n"; 
+const int poundsToShilling = 20, shillingsToPennies = 12; //Валюты для преобразования
 
-int CorrectInput(bool isSum)
+int CorrectInput(bool isCost)
 {
-    int allPennies = 0;
-    string message = isSum == true ? "сумму" : "количество денег";
-
+    int allPennies = 0; //Суммарное количество пенсов
+    string message = isCost == true ? "сумму" : "количество денег"; //Для различия какое данные сейчас вводятся стоимость или деньги покупателя
+    //Считывание данных пока все не будут корректны 
     while (!successParse)
     {
         Console.WriteLine($"----Введите {message}----");
@@ -33,7 +33,7 @@ int CorrectInput(bool isSum)
             continue;
         }
 
-        allPennies += (pounds * poundsToShilling + shillings) * shillingsToPennies;
+        allPennies += (pounds * poundsToShilling + shillings) * shillingsToPennies; //Преобразование фунтов и шиллингов в пенсы
         allPennies += pennies;
         successParse = true;
     }
@@ -41,9 +41,9 @@ int CorrectInput(bool isSum)
     return allPennies;
 }
 
-int costInPennies = CorrectInput(true);
-successParse = false;
-int sumInPennies = CorrectInput(false); 
+int costInPennies = CorrectInput(true); //Преобразование стоимости в пенсы
+successParse = false; 
+int sumInPennies = CorrectInput(false); //Преобразование денег покупателя
 
 
 
