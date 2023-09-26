@@ -50,14 +50,18 @@ uint sumInPennies = CorrectInput(false); //Преобразование дене
 if (costInPennies == sumInPennies)
     Console.WriteLine("Нет сдачи");
 else if (costInPennies > sumInPennies)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("Ошибка");
+    Console.ResetColor();
+}
 else
 {
     Console.WriteLine("---- Сдача ----");
     //Преобразование валюты 
     uint changeInPennies = sumInPennies - costInPennies;
     uint changePounds = (uint)(changeInPennies / poundsToPennies),
-        changeShilling = (uint) (changeInPennies % poundsToPennies) / shillingsToPennies,
+        changeShilling = (uint)(changeInPennies % poundsToPennies) / shillingsToPennies,
         changePennies = (uint)(changeInPennies % poundsToPennies % shillingsToPennies);
     //Вывод сдачи
     if (changePounds > 0) Console.WriteLine($"{poundsStr}: {changePounds}");
