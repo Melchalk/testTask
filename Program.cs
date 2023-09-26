@@ -9,11 +9,11 @@ const string poundsStr = "Фунты", shillingsStr = "Шиллинги", pennie
 uint CorrectInput(bool isCost)
 {
     uint allPennies = 0; //Суммарное количество пенсов
-    string message = isCost == true ? "сумму" : "количество денег"; //Для различия какое данные сейчас вводятся стоимость или деньги покупателя
+    string message = isCost == true ? "стоимость" : "количество денег"; //Для различия какие данные сейчас вводятся стоимость или деньги покупателя
     //Считывание данных пока все не будут корректны 
     while (!successParse)
     {
-        Console.WriteLine($"----Введите {message}----");
+        Console.WriteLine($"---- Введите {message} ----");
 
         Console.Write($"{poundsStr}: ");
         if (!uint.TryParse(Console.ReadLine(), out uint pounds))
@@ -36,8 +36,7 @@ uint CorrectInput(bool isCost)
             continue;
         }
 
-        allPennies += (uint)(pounds * poundsToPennies + shillings * shillingsToPennies); //Преобразование фунтов и шиллингов в пенсы
-        allPennies += pennies;
+        allPennies = (uint)(pounds * poundsToPennies + shillings * shillingsToPennies + pennies); //Преобразование фунтов и шиллингов в пенсы
         successParse = true;
     }
     Console.WriteLine($"Итог: {allPennies} пенсов\n");
@@ -58,7 +57,7 @@ else
     //Преобразование валюты 
     uint changeInPennies = sumInPennies - costInPennies;
     uint changePounds = (uint)(changeInPennies / poundsToPennies),
-        changeShilling = (changeInPennies / shillingsToPennies) % changePounds,
+        changeShilling = (uint) (changeInPennies % poundsToPennies) / shillingsToPennies,
         changePennies = (uint)(changeInPennies % poundsToPennies % shillingsToPennies);
     //Вывод сдачи
     if (changePounds > 0) Console.WriteLine($"{poundsStr}: {changePounds}");
